@@ -54,6 +54,7 @@ class Cloud(object):
 			else:
 				strikes()
 				storm()
+			time.sleep(3000,10000)
 	
 	#This runs a set of strikes			
 	def strikes(self):
