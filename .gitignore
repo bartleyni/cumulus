@@ -215,5 +215,5 @@ pip-log.txt
 .mr.developer.cfg
 
 ###Media
-.mp3
-.wav
+*.mp3
+*.wav
