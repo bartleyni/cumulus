@@ -34,10 +34,10 @@ class Cloud(object):
 		self.PIFACE = PIFACE
 		self.VLC = VLC
 		self.randomSound = 1
-		self.delayTime = 201
+		self.delayTime = 0.201
 		self.flash = 31
 		self.randomChoose = 1
-		self.flashTime = 1
+		self.flashTime = 0.001
 		self.sporaticCounter = 0
 		self.strikeCounter = 0
 
@@ -46,7 +46,7 @@ class Cloud(object):
 		print("running")
 		while True:
 			print("In Loop")
-			time.sleep(3000)
+			time.sleep(3)
 			sensor1 = 0
 			sensor2 = 0
 			sensor1 = self.PIFACE.input_pins[1].value
@@ -58,17 +58,17 @@ class Cloud(object):
 				strikes()
 				storm()
 				print("MOTION")[1]
-				time.sleep(3000,10000)
+				time.sleep(3,10)
 	
 	#This runs a set of strikes			
 	def strikes(self):
 		self.strikeCounter = 0
 		while self.strikeCounter < random.randint(3,25):
 			self.sporaticCounter = 0
-			self.delayTime = random.randint(30,5000)
-			self.flash = random.randint(10,50)
-			self.flashTime = random.randint(1,3)
-			self.randomChoose = random.randint(1,6)
+			self.delayTime = random.randint(0.030,5)
+			self.flash = random.randint(0.010,0.050)
+			self.flashTime = random.randint(0.001,0.003)
+			self.randomChoose = random.randint(0.001,0.006)
 			while flashTime > self.sporaticCounter:
 				print("flash")
 				self.PIFACE.output_pins[self.randomChoose].turn_on()
@@ -84,95 +84,95 @@ class Cloud(object):
 		print("storm")
 		#FIRST FLASH
 		PIFACE.output_pins[1].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[2].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[3].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[4].turn_on()
-		time.sleep(random.randrange(5,50,5))			
+		time.sleep(random.randrange(0.005,0.050,0.005))			
 		PIFACE.output_pins[5].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[6].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[3].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[1].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[2].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[5].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[6].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[4].turn_off()
 		#SECOND FLASH
 		PIFACE.output_pins[5].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[2].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[1].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[2].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[5].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[1].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		#THIRD FLASH
 		PIFACE.output_pins[4].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[6].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[3].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[6].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[4].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[3].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		#THUNDER CLAP
 		#thunder()
 		#FORTH FLASH
 		PIFACE.output_pins[6].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[3].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[2].turn_on()
-		time.sleep(random.randrange(5,50,5))			
+		time.sleep(random.randrange(0.005,0.050,0.005))			
 		PIFACE.output_pins[5].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[3].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[2].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		ttime.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[6].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[5].turn_off()
 		#FIFTH FLASH
 		PIFACE.output_pins[4].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[6].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[3].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[1].turn_on()
-		time.sleep(random.randrange(5,50,5))			
+		time.sleep(random.randrange(0.005,0.050,0.005))		
 		PIFACE.output_pins[2].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		ttime.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[5].turn_on()
-		time.sleep(random.randrange(5,50,5))
+		time.sleep(random.randrange(0.005,0.050,0.005))
 		PIFACE.output_pins[6].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[3].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		ttime.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[2].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[5].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[1].turn_off()
-		time.sleep(random.randrange(20,100,10))
+		time.sleep(random.randrange(0.020,0.100,0.010))
 		PIFACE.output_pins[4].turn_off()
 	
 	def thunder(self):
