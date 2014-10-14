@@ -9,33 +9,14 @@ import random
 import re
 import pifacedigitalio
 import pygame
-from vlcclient import VLCClient
 
 ### Cumulus Semi-Smart Cloud ###
 ### Nick Bartley 2014 ###
-
-#General Control Variables
-SHUTDOWN_CMD = "sudo shutdown now"
-REBOOT_CMD = "sudo shutdown -r now"
-	
-def run_cmd(cmd):
-	return subprocess.check_output(cmd, shell=True).decode('utf-8')
-
-def shutdown():
-	run_cmd(SHUTDOWN_CMD)
-
-def reboot():
-	run_cmd(REBOOT_CMD)
 			
 class Cloud(object):
-	#def __init__(self, PIFACE, VLC):
 	def __init__(self, PIFACE):
-		
-		#self.current_option_index = initial_option
-		
-		self.PIFACE = PIFACE
-		#self.VLC = VLC
-		
+			
+		self.PIFACE = PIFACE		
 		self.randomSound = 1
 		self.delayTime = 201
 		self.flash = 31
@@ -122,6 +103,8 @@ class Cloud(object):
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[1].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
+		#THUNDER CLAP
+		self.thunder()
 		#THIRD FLASH
 		self.PIFACE.output_pins[4].turn_on()
 		time.sleep(random.randrange(5,50,5)/1000)
@@ -135,8 +118,6 @@ class Cloud(object):
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[3].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
-		#THUNDER CLAP
-		self.thunder()
 		#FORTH FLASH
 		self.PIFACE.output_pins[6].turn_on()
 		time.sleep(random.randrange(5,50,5)/1000)
@@ -177,29 +158,41 @@ class Cloud(object):
 		self.PIFACE.output_pins[1].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[4].turn_off()
-	
+		#SIXTH FLASH
+		self.PIFACE.output_pins[2].turn_on()
+		time.sleep(random.randrange(5,50,5)/1000)
+		self.PIFACE.output_pins[4].turn_on()
+		time.sleep(random.randrange(5,50,5)/1000)
+		self.PIFACE.output_pins[3].turn_on()
+		time.sleep(random.randrange(5,50,5)/1000)
+		self.PIFACE.output_pins[1].turn_on()
+		time.sleep(random.randrange(5,50,5)/1000)			
+		self.PIFACE.output_pins[5].turn_on()
+		time.sleep(random.randrange(5,50,5)/1000)
+		self.PIFACE.output_pins[6].turn_on()
+		time.sleep(random.randrange(5,50,5)/1000)
+		self.PIFACE.output_pins[4].turn_off()
+		time.sleep(random.randrange(20,100,10)/1000)
+		self.PIFACE.output_pins[1].turn_off()
+		time.sleep(random.randrange(20,100,10)/1000)
+		self.PIFACE.output_pins[3].turn_off()
+		time.sleep(random.randrange(20,100,10)/1000)
+		self.PIFACE.output_pins[2].turn_off()
+		time.sleep(random.randrange(20,100,10)/1000)
+		self.PIFACE.output_pins[6].turn_off()
+		time.sleep(random.randrange(20,100,10)/1000)
+		self.PIFACE.output_pins[5].turn_off()
 	def thunder(self):
 		silence = self.PIFACE.input_pins[3].value
 		self.randomSound = random.randint(1,8)
 		pygame.mixer.init()
 		if silence == 0:
-			#self.VLC.connect()
-			#seld.VLC.clear()
-			#self.VLC.add("cumulus/thunder/"+self.randomSound+".wav")
-			#self.VLC.disconnect()
 			effect = pygame.mixer.Sound("thunder/"+str(self.randomSound)+".wav")
 			effect.play()
 		
 if __name__ == "__main__":
 	
-	#PLAYER_PROCESS = subprocess.Popen(["/usr/bin/vlc", "-I", "dummy", "--volume", "150", "--intf", "telnet", "--lua-config", "telnet={host='0.0.0.0:4212'}"])
-	
 	pfd = pifacedigitalio.PiFaceDigital()
-	
-	#vlc = VLCClient("127.0.0.1",4212,"admin",1)
-	
 	global cloud
-	
-	#cloud = Cloud(pfd, vlc)
 	cloud = Cloud(pfd)
 	cloud.run();
