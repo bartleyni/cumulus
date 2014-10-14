@@ -43,6 +43,7 @@ class Cloud(object):
 
 	#This is the main cloud loop		
 	def run(self):
+		print("running")
 		while True:
 			time.sleep(3000)
 			sensor1 = 0
@@ -67,6 +68,7 @@ class Cloud(object):
 			self.flashTime = random.randint(1,3)
 			self.randomChoose = random.randint(1,6)
 			while flashTime > self.sporaticCounter:
+				print("flash")
 				PIFACE.output_pins[self.randomChoose].turn_on()
 				time.sleep(self.flash)
 				PIFACE.output_pins[self.randomChoose].turn_off()
@@ -77,6 +79,7 @@ class Cloud(object):
 	
 	#This runs a storm
 	def storm(self):
+		print("storm")
 		#FIRST FLASH
 		PIFACE.output_pins[1].turn_on()
 		time.sleep(random.randrange(5,50,5))
