@@ -128,7 +128,7 @@ class Cloud(object):
 		PIFACE.output_pins[3].turn_off()
 		time.sleep(random.randrange(20,100,10))
 		#THUNDER CLAP
-		thunder()
+		#thunder()
 		#FORTH FLASH
 		PIFACE.output_pins[6].turn_on()
 		time.sleep(random.randrange(5,50,5))
@@ -181,7 +181,7 @@ class Cloud(object):
 		
 if __name__ == "__main__":
 	
-	PLAYER_PROCESS = subprocess.Popen(["/usr/bin/vlc", "-I", "dummy", "--volume", "150", "--intf", "telnet", "--lua-config", "telnet={host='0.0.0.0:4212'}"])
+	#PLAYER_PROCESS = subprocess.Popen(["/usr/bin/vlc", "-I", "dummy", "--volume", "150", "--intf", "telnet", "--lua-config", "telnet={host='0.0.0.0:4212'}"])
 	
 	pfd = pifacedigitalio.PiFaceDigital()
 	
