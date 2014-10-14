@@ -105,6 +105,7 @@ class Cloud(object):
 		time.sleep(random.randrange(20,100,10)/1000)
 		#THUNDER CLAP
 		self.thunder()
+		time.sleep(1)
 		#THIRD FLASH
 		self.PIFACE.output_pins[4].turn_on()
 		time.sleep(random.randrange(5,50,5)/1000)
@@ -134,6 +135,7 @@ class Cloud(object):
 		self.PIFACE.output_pins[6].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[5].turn_off()
+		time.sleep(1)
 		#FIFTH FLASH
 		self.PIFACE.output_pins[4].turn_on()
 		time.sleep(random.randrange(5,50,5)/1000)
@@ -182,6 +184,7 @@ class Cloud(object):
 		self.PIFACE.output_pins[6].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[5].turn_off()
+	
 	def thunder(self):
 		silence = self.PIFACE.input_pins[3].value
 		self.randomSound = random.randint(1,7)
