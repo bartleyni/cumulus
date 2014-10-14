@@ -55,8 +55,8 @@ class Cloud(object):
 				#DO NOTHING
 				print("NO MOTION")
 			else:
-				strikes()
-				storm()
+				self.strikes()
+				self.storm()
 				print("MOTION")[1]
 				time.sleep(3,10)
 	
