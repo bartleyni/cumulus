@@ -58,7 +58,7 @@ class Cloud(object):
 				strikes()
 				storm()
 				print("MOTION")[1]
-			time.sleep(3000,10000)
+				time.sleep(3000,10000)
 	
 	#This runs a set of strikes			
 	def strikes(self):
