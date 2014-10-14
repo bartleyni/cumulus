@@ -48,14 +48,15 @@ class Cloud(object):
 			time.sleep(3000)
 			sensor1 = 0
 			sensor2 = 0
-			sensor1 = PIFACE.input_pins[1].value
-			sensor2 = PIFACE.input_pins[2].value
+			sensor1 = self.PIFACE.input_pins[1].value
+			sensor2 = self.PIFACE.input_pins[2].value
 			if sensor1 == 0 and sensor2 == 0:
 				#DO NOTHING
-				print("MOTION")
+				print("NO MOTION")
 			else:
 				strikes()
 				storm()
+				print("MOTION")[1]
 			time.sleep(3000,10000)
 	
 	#This runs a set of strikes			
@@ -69,9 +70,9 @@ class Cloud(object):
 			self.randomChoose = random.randint(1,6)
 			while flashTime > self.sporaticCounter:
 				print("flash")
-				PIFACE.output_pins[self.randomChoose].turn_on()
+				self.PIFACE.output_pins[self.randomChoose].turn_on()
 				time.sleep(self.flash)
-				PIFACE.output_pins[self.randomChoose].turn_off()
+				self.PIFACE.output_pins[self.randomChoose].turn_off()
 				time.sleep(self.flash)
 				self.sporaticCounter += 1
 			time.sleep(self.delayTime)
