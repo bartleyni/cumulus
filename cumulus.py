@@ -51,6 +51,7 @@ class Cloud(object):
 			sensor2 = PIFACE.input_pins[2].value
 			if sensor1 == 0 and sensor2 == 0:
 				#DO NOTHING
+				print("MOTION")
 			else:
 				strikes()
 				storm()
