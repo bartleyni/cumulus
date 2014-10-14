@@ -55,8 +55,8 @@ class Cloud(object):
 				#DO NOTHING
 				print("NO MOTION")
 			else:
-				strikes()
-				storm()
+				self.strikes()
+				self.storm()
 				print("MOTION")[1]
 				time.sleep(3,10)
 	
@@ -133,7 +133,7 @@ class Cloud(object):
 		PIFACE.output_pins[3].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
 		#THUNDER CLAP
-		#thunder()
+		#self.thunder()
 		#FORTH FLASH
 		PIFACE.output_pins[6].turn_on()
 		time.sleep(random.randrange(5,50,5)/1000)
