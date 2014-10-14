@@ -185,7 +185,7 @@ class Cloud(object):
 			#seld.VLC.clear()
 			#self.VLC.add("cumulus/thunder/"+self.randomSound+".wav")
 			#self.VLC.disconnect()
-			effect = pygame.mixer.Sound("thunder/"+self.randomSound+".wav")
+			effect = pygame.mixer.Sound("thunder/"+str(self.randomSound)+".wav")
 			effect.play()
 		
 if __name__ == "__main__":
