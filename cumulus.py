@@ -35,6 +35,7 @@ class Cloud(object):
 		
 		self.PIFACE = PIFACE
 		#self.VLC = VLC
+		
 		self.randomSound = 1
 		self.delayTime = 201
 		self.flash = 31
@@ -180,6 +181,7 @@ class Cloud(object):
 	def thunder(self):
 		silence = self.PIFACE.input_pins[3].value
 		self.randomSound = random.randint(1,8)
+		pygame.mixer.init()
 		if silence == 0:
 			#self.VLC.connect()
 			#seld.VLC.clear()
