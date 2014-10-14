@@ -172,7 +172,7 @@ class Cloud(object):
 	def thunder(self):
 		silence = PIFACE.input_pins[3].value
 		self.randomSound = random.randint(1,8)
-		if silence == 1:
+		if silence == 0:
 			self.VLC.connect()
 			seld.VLC.clear()
 			self.VLC.add("cumulus/thunder/"+self.randomSound+".wav")
