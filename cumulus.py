@@ -69,12 +69,12 @@ class Cloud(object):
 			self.flash = random.randint(10,50)
 			self.flashTime = random.randint(1,3)/1000
 			self.randomChoose = random.randint(1,6)
-			while flashTime > self.sporaticCounter:
+			while self.flash > self.sporaticCounter:
 				print("flash")
 				self.PIFACE.output_pins[self.randomChoose].turn_on()
-				time.sleep(self.flash)
+				time.sleep(self.flashTime)
 				self.PIFACE.output_pins[self.randomChoose].turn_off()
-				time.sleep(self.flash)
+				time.sleep(self.flashTime)
 				self.sporaticCounter += 1
 			time.sleep(self.delayTime)
 			self.strikeCounter += 1				
