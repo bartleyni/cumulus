@@ -45,6 +45,7 @@ class Cloud(object):
 	def run(self):
 		print("running")
 		while True:
+			print("In Loop")
 			time.sleep(3000)
 			sensor1 = 0
 			sensor2 = 0
