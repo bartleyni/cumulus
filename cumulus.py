@@ -8,6 +8,7 @@ import glob
 import random
 import re
 import pifacedigitalio
+import pygame
 from vlcclient import VLCClient
 
 ### Cumulus Semi-Smart Cloud ###
@@ -27,12 +28,13 @@ def reboot():
 	run_cmd(REBOOT_CMD)
 			
 class Cloud(object):
-	def __init__(self, PIFACE, VLC):
+	#def __init__(self, PIFACE, VLC):
+	def __init__(self, PIFACE):
 		
 		#self.current_option_index = initial_option
 		
 		self.PIFACE = PIFACE
-		self.VLC = VLC
+		#self.VLC = VLC
 		self.randomSound = 1
 		self.delayTime = 201
 		self.flash = 31
@@ -63,11 +65,11 @@ class Cloud(object):
 	#This runs a set of strikes			
 	def strikes(self):
 		self.strikeCounter = 0
-		while self.strikeCounter < random.randint(3,25):
+		while self.strikeCounter < random.randint(5,25):
 			self.sporaticCounter = 0
 			self.delayTime = random.randint(30,5000)/1000
-			self.flash = random.randint(10,50)
-			self.flashTime = random.randint(1,3)/1000
+			self.flash = random.randint(1,3)
+			self.flashTime = random.randint(10,50)/1000
 			self.randomChoose = random.randint(1,6)
 			while self.flash > self.sporaticCounter:
 				print("flash")
@@ -179,20 +181,23 @@ class Cloud(object):
 		silence = self.PIFACE.input_pins[3].value
 		self.randomSound = random.randint(1,8)
 		if silence == 0:
-			self.VLC.connect()
-			seld.VLC.clear()
-			self.VLC.add("cumulus/thunder/"+self.randomSound+".wav")
-			self.VLC.disconnect()
+			#self.VLC.connect()
+			#seld.VLC.clear()
+			#self.VLC.add("cumulus/thunder/"+self.randomSound+".wav")
+			#self.VLC.disconnect()
+			effect = pygame.mixer.Sound("thunder/"+self.randomSound+".wav")
+			effect.play()
 		
 if __name__ == "__main__":
 	
-	PLAYER_PROCESS = subprocess.Popen(["/usr/bin/vlc", "-I", "dummy", "--volume", "150", "--intf", "telnet", "--lua-config", "telnet={host='0.0.0.0:4212'}"])
+	#PLAYER_PROCESS = subprocess.Popen(["/usr/bin/vlc", "-I", "dummy", "--volume", "150", "--intf", "telnet", "--lua-config", "telnet={host='0.0.0.0:4212'}"])
 	
 	pfd = pifacedigitalio.PiFaceDigital()
 	
-	vlc = VLCClient("127.0.0.1",4212,"admin",1)
+	#vlc = VLCClient("127.0.0.1",4212,"admin",1)
 	
 	global cloud
 	
-	cloud = Cloud(pfd, vlc)
+	#cloud = Cloud(pfd, vlc)
+	cloud = Cloud(pfd)
 	cloud.run();
