@@ -210,7 +210,7 @@ class Cloud(object):
 			# Do FFT
 			levels = self.calculate_levels(data, chunk, samplerate)
 			led = 0
-            for level in levels:
+			for level in levels:
 				level = max(min(level / scale, 1.0), 0.0)
 				level = level**exponent
 				level = int(level * 255)
