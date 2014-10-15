@@ -200,7 +200,7 @@ class Cloud(object):
 		scale      = 50    # Change if too dim/bright
 		exponent   = 5     # Change if too little/too much difference between loud and quiet sounds
 		samplerate = 44100
-		device   = 2  
+		device   = 1 
     
 		p = pyaudio.PyAudio()
 		stream = p.open(format = pyaudio.paInt16, channels = 1, rate = 44100, input = True, frames_per_buffer = chunk, input_device_index = device)
