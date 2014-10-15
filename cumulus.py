@@ -225,7 +225,8 @@ class Cloud(object):
 				
 	def calculate_levels(data, chunk, samplerate):
 		# Use FFT to calculate volume for each frequency
-		global MAX = 0
+		global MAX
+		MAX = 0
 	 
 		# Convert raw sound data to Numpy array
 		fmt = "%dH"%(len(data)/2)
