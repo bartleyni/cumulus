@@ -45,7 +45,8 @@ class Cloud(object):
 					self.storm()
 					time.sleep(random.randint(3,10))
 			else:
-				self.soundTOlight()
+				#self.soundTOlight()
+				self.list_devices()
 	
 	#This runs a set of strikes			
 	def strikes(self):
@@ -252,6 +253,18 @@ class Cloud(object):
 		
 		return levels
 
+		def list_devices(self):
+			# List all audio input devices
+			p = pyaudio.PyAudio()
+			i = 0
+			n = p.get_device_count()
+			while i < n:
+				dev = p.get_device_info_by_index(i)
+				if dev['maxInputChannels'] > 0:
+					print str(i)+'. '+dev['name']
+				i += 1
+		
+		
 if __name__ == "__main__":
 	
 	pfd = pifacedigitalio.PiFaceDigital()
