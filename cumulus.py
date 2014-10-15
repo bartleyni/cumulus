@@ -185,7 +185,7 @@ class Cloud(object):
 	
 	def thunder(self):
 		silence = self.PIFACE.input_pins[3].value
-		self.randomSound = random.randint(1,7)
+		self.randomSound = random.randint(1,4)
 		pygame.mixer.init()
 		if silence == 0:
 			effect = pygame.mixer.Sound("/home/pi/cumulus/thunder/"+str(self.randomSound)+".wav")
