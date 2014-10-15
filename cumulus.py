@@ -33,16 +33,14 @@ class Cloud(object):
 			time.sleep(3)
 			sensor1 = 0
 			sensor2 = 0
-			sensor1 = self.PIFACE.input_pins[1].value
-			sensor2 = self.PIFACE.input_pins[2].value
-			if sensor1 == 0 and sensor2 == 0:
-				#DO NOTHING
-				print("NO MOTION")
-			else:
+			sensor1 = self.PIFACE.input_pins[4].value
+			sensor2 = self.PIFACE.input_pins[5].value
+			if sensor1 == 0 or sensor2 == 0:
 				self.strikes()
 				self.storm()
 				print("MOTION")[1]
 				time.sleep(random.randint(3,10))
+				
 	
 	#This runs a set of strikes			
 	def strikes(self):
