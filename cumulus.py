@@ -214,7 +214,7 @@ class Cloud(object):
 			data  = stream.read(chunk)
 			
 			# Do FFT
-            levels = calculate_levels(data, chunk, samplerate)
+            levels = self.calculate_levels(data, chunk, samplerate)
 			
             # Make it look better and send to serial
 			led = 0
