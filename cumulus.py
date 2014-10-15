@@ -9,13 +9,6 @@ import random
 import re
 import pifacedigitalio
 import pygame
-import pyaudio
-import numpy
-import audioop
-import sys
-import math
-import struct
-import alsaaudio as aa
 
 ### Cumulus Semi-Smart Cloud ###
 ### Nick Bartley 2014 ###
