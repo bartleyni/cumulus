@@ -203,15 +203,10 @@ class Cloud(object):
 		device   = 2  
     
 		p = pyaudio.PyAudio()
-		stream = p.open(format = pyaudio.paInt16,
-			channels = 1,
-			rate = 44100,
-			input = True,
-			frames_per_buffer = chunk,
-			input_device_index = device)
+		stream = p.open(format = pyaudio.paInt16, channels = 1, rate = 44100, input = True, frames_per_buffer = chunk, input_device_index = device)
 			
 		while self.PIFACE.input_pins[0].value == 1:
-			data  = stream.read(chunk)
+			data = stream.read(chunk)
 			
 			# Do FFT
             levels = self.calculate_levels(data, chunk, samplerate)
@@ -227,6 +222,7 @@ class Cloud(object):
 				if level < 100:
 					self.PIFACE.output_pins[led].turn_off()
 				led += 1
+				
 		stream.close()
         p.terminate()
 				
