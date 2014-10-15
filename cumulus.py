@@ -207,16 +207,13 @@ class Cloud(object):
 			
 		while self.PIFACE.input_pins[0].value == 1:
 			data = stream.read(chunk)
-			
 			# Do FFT
-            levels = self.calculate_levels(data, chunk, samplerate)
-			
-            # Make it look better and send to serial
+			levels = self.calculate_levels(data, chunk, samplerate)
 			led = 0
             for level in levels:
-                level = max(min(level / scale, 1.0), 0.0)
-                level = level**exponent 
-                level = int(level * 255)
+				level = max(min(level / scale, 1.0), 0.0)
+				level = level**exponent
+				level = int(level * 255)
 				if level > 100:
 					self.PIFACE.output_pins[led].turn_on()
 				if level < 100:
@@ -224,7 +221,7 @@ class Cloud(object):
 				led += 1
 				
 		stream.close()
-        p.terminate()
+		p.terminate()
 				
 	def calculate_levels(data, chunk, samplerate):
 		# Use FFT to calculate volume for each frequency
