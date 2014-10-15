@@ -15,6 +15,7 @@ import audioop
 import sys
 import math
 import struct
+import alsaaudio as aa
 
 ### Cumulus Semi-Smart Cloud ###
 ### Nick Bartley 2014 ###
@@ -46,7 +47,7 @@ class Cloud(object):
 					time.sleep(random.randint(3,10))
 			else:
 				#self.soundTOlight()
-				self.list_devices()
+				#self.list_devices()
 	
 	#This runs a set of strikes			
 	def strikes(self):
@@ -195,75 +196,6 @@ class Cloud(object):
 		if silence == 0:
 			effect = pygame.mixer.Sound("/home/pi/cumulus/thunder/"+str(self.randomSound)+".wav")
 			effect.play()
-
-	def soundTOlight(self):
-		chunk      = 2**11 # Change if too fast/slow, never less than 2**11
-		scale      = 50    # Change if too dim/bright
-		exponent   = 5     # Change if too little/too much difference between loud and quiet sounds
-		samplerate = 44100
-		device   = 1 
-    
-		p = pyaudio.PyAudio()
-		stream = p.open(format = pyaudio.paInt16, channels = 1, rate = 44100, input = True, frames_per_buffer = chunk, input_device_index = device)
-			
-		while self.PIFACE.input_pins[0].value == 1:
-			data = stream.read(chunk)
-			# Do FFT
-			levels = self.calculate_levels(data, chunk, samplerate)
-			led = 0
-			for level in levels:
-				level = max(min(level / scale, 1.0), 0.0)
-				level = level**exponent
-				level = int(level * 255)
-				if level > 100:
-					self.PIFACE.output_pins[led].turn_on()
-				if level < 100:
-					self.PIFACE.output_pins[led].turn_off()
-				led += 1
-				
-		stream.close()
-		p.terminate()
-				
-	def calculate_levels(data, chunk, samplerate):
-		# Use FFT to calculate volume for each frequency
-		global MAX
-		MAX = 0
-	 
-		# Convert raw sound data to Numpy array
-		fmt = "%dH"%(len(data)/2)
-		data2 = struct.unpack(fmt, data)
-		data2 = numpy.array(data2, dtype='h')
-	 
-		# Apply FFT
-		fourier = numpy.fft.fft(data2)
-		ffty = numpy.abs(fourier[0:len(fourier)/2])/1000
-		ffty1=ffty[:len(ffty)/2]
-		ffty2=ffty[len(ffty)/2::]+2
-		ffty2=ffty2[::-1]
-		ffty=ffty1+ffty2
-		ffty=numpy.log(ffty)-2
-		
-		fourier = list(ffty)[4:-4]
-		fourier = fourier[:len(fourier)/2]
-		
-		size = len(fourier)
-	 
-		# Add up for 6 lights
-		levels = [sum(fourier[i:(i+size/6)]) for i in xrange(0, size, size/6)][:6]
-		
-		return levels
-
-	def list_devices(self):
-		# List all audio input devices
-		p = pyaudio.PyAudio()
-		i = 0
-		n = p.get_device_count()
-		while i < n:
-			dev = p.get_device_info_by_index(i)
-			if dev['maxInputChannels'] > 0:
-				print str(i)+'. '+dev['name']
-			i += 1
-		
 		
 if __name__ == "__main__":
 	
