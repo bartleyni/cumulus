@@ -29,7 +29,7 @@ class Cloud(object):
 	def run(self):
 		while True:
 			if self.PIFACE.input_pins[0].value == 0:
-				time.sleep(3)
+				time.sleep(1)
 				sensor1 = 0
 				sensor2 = 0
 				sensor1 = self.PIFACE.input_pins[4].value
@@ -41,8 +41,10 @@ class Cloud(object):
 			else:
 				#self.soundTOlight()
 				#self.list_devices()
+				time.sleep(1)
 	
-	#This runs a set of strikes			
+	
+	#This runs a set of strikes	
 	def strikes(self):
 		self.strikeCounter = 0
 		while self.strikeCounter < random.randint(5,25):
