@@ -215,7 +215,7 @@ class Cloud(object):
 			
 			# Do FFT
             levels = calculate_levels(data, chunk, samplerate)
- 
+			
             # Make it look better and send to serial
 			led = 0
             for level in levels:
