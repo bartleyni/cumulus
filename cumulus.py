@@ -254,8 +254,8 @@ class Cloud(object):
 		matrix[2]= int(np.mean(power[self.piff(313)  :self.piff(625):1]))
 		matrix[3]= int(np.mean(power[self.piff(625)  :self.piff(1250):1]))
 		matrix[4]= int(np.mean(power[self.piff(1250) :self.piff(2500):1]))
-		matrix[5]= int(np.mean(power[self.piff(2500) :self.piff(5000):1]))
-		matrix[6]= int(np.mean(power[self.piff(5000) :self.piff(10000):1]))
+		matrix[5]= int(np.mean(power[self.piff(2500) :self.piff(4000):1]))
+		matrix[6]= int(np.mean(power[self.piff(4000) :self.piff(10000):1]))
 		matrix[7]= int(np.mean(power[self.piff(10000):self.piff(20000):1]))
 		# Tidy up column values for the LED matrix
 		matrix=np.divide(np.multiply(matrix,weighting),1000000)
