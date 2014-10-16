@@ -33,7 +33,8 @@ class Cloud(object):
 	def run(self):
 		pygame.mixer.init()
 		while True:
-			if self.PIFACE.input_pins[0].value == 0:
+			if self.PIFACE.input_pins[0].value == 1:
+				self.alloff()
 				time.sleep(1)
 				sensor1 = 0
 				sensor2 = 0
@@ -49,7 +50,10 @@ class Cloud(object):
 				self.audio_playback()
 				time.sleep(1)
 	
-	
+	def alloff(self):
+		for i in range (0,8):
+			self.PIFACE.output_pins[i].turn_off()
+			
 	#This runs a set of strikes	
 	def strikes(self):
 		self.strikeCounter = 0
@@ -209,7 +213,7 @@ class Cloud(object):
 		data_in.setformat(aa.PCM_FORMAT_S16_LE)
 		data_in.setperiodsize(chunk)
 		
-		while self.PIFACE.input_pins[0].value == 1:
+		while self.PIFACE.input_pins[0].value == 0:
 			# Read data from device   
 			l,data = data_in.read()
 			data_in.pause(1) # Pause capture whilst RPi processes data
