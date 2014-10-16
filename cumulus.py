@@ -223,7 +223,7 @@ class Cloud(object):
 				except audioop.error, e:
 					if e.message !="not a whole number of frames":
 						raise e
-			sleep(0.001)
+			time.sleep(0.001)
 			data_in.pause(0) # Resume capture
 			
 	def calculate_levels(self, data, chunk, sample_rate):
