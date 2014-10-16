@@ -253,11 +253,11 @@ class Cloud(object):
 		matrix[7]= int(np.mean(power[piff(10000):piff(20000):1]))	   
 		# Set floor at 0 and ceiling at 8 for LED matrix
 		matrix=matrix.clip(0,8) 	   
-		
-	   # Araange array into 6 rows for the 6 LEDs
-	   #power = np.reshape(power,(6,chunk/6))
-	   #matrix= np.int_(np.average(power,axis=1)/4)
-	   return matrix
+
+		# Araange array into 6 rows for the 6 LEDs
+		#power = np.reshape(power,(6,chunk/6))
+		#matrix= np.int_(np.average(power,axis=1)/4)
+		return matrix
 
 	def Set_Led(row, col, self):
 		if col > 0x7D:
