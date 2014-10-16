@@ -261,7 +261,7 @@ class Cloud(object):
 		#matrix= np.int_(np.average(power,axis=1)/4)
 		return matrix
 
-	def Set_Led(self, row, col):
+	def Set_Led(self, col, row):
 		if col > 0x7D:
 			self.PIFACE.output_pins[row].turn_on()
 		else:
@@ -269,7 +269,7 @@ class Cloud(object):
 
 	# Return power array index corresponding to a particular frequency
 	def piff(self, val):
-		return int(2*512*val/44100)
+		return int(2*1024*val/44100)
 		
 if __name__ == "__main__":
 	
