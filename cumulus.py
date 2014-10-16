@@ -44,6 +44,7 @@ class Cloud(object):
 			else:
 				#self.soundTOlight()
 				#self.list_devices()
+				self.audio_playback()
 				time.sleep(1)
 	
 	
