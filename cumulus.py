@@ -12,6 +12,7 @@ import pygame
 import alsaaudio as aa
 import numpy as np
 from struct import unpack
+import audioop
 
 ### Cumulus Semi-Smart Cloud ###
 ### Nick Bartley 2014 ###
