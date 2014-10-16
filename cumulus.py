@@ -31,6 +31,7 @@ class Cloud(object):
 
 	#This is the main cloud loop		
 	def run(self):
+		pygame.mixer.init()
 		while True:
 			if self.PIFACE.input_pins[0].value == 0:
 				time.sleep(1)
@@ -192,7 +193,7 @@ class Cloud(object):
 	def thunder(self):
 		silence = self.PIFACE.input_pins[3].value
 		self.randomSound = random.randint(1,4)
-		pygame.mixer.init()
+		#pygame.mixer.init()
 		if silence == 0:
 			effect = pygame.mixer.Sound("/home/pi/cumulus/thunder/"+str(self.randomSound)+".wav")
 			effect.play()
@@ -230,7 +231,7 @@ class Cloud(object):
 	   
 		matrix    = [0,0,0,0,0,0,0,0]
 		power     = []
-		weighting = [2,2,8,8,16,32,64,64] # Change these according to taste
+		weighting = [2,8,8,8,16,32,128,128] # Change these according to taste
 		
 		# Convert raw data to numpy array
 		data = unpack("%dh"%(len(data)/2),data)
