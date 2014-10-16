@@ -204,7 +204,7 @@ class Cloud(object):
 	
 	def audio_playback(self):
 		# Set up audio
-		sample_rate = 22050
+		sample_rate = 48000
 		no_channels = 2
 		chunk = 1024 # Use a multiple of 8
 		data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_NORMAL)
@@ -274,7 +274,7 @@ class Cloud(object):
 
 	# Return power array index corresponding to a particular frequency
 	def piff(self, val):
-		return int(2*1024*val/22050)
+		return int(2*1024*val/48000)
 		
 if __name__ == "__main__":
 	
