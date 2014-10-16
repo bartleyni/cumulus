@@ -215,7 +215,7 @@ class Cloud(object):
 			if l:
 				# catch frame error
 				try:
-					matrix=self.calculate_levels(data, chunk,sample_rate)
+					matrix=self.calculate_levels(data, chunk, sample_rate)
 					for i in range (0,6):
 						#Set_Column((1<<matrix[i])-1,0xFF^(1<<i))
 						self.Set_Led((1<<matrix[i])-1,i)								
@@ -226,7 +226,7 @@ class Cloud(object):
 			sleep(0.001)
 			data_in.pause(0) # Resume capture
 			
-	def calculate_levels(data, chunk,sample_rate):
+	def calculate_levels(data, chunk, sample_rate):
 	   # Convert raw data to numpy array
 	   data = unpack("%dh"%(len(data)/2),data)
 	   data = np.array(data, dtype='h')
