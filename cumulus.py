@@ -236,8 +236,8 @@ class Cloud(object):
 	   fourier=np.delete(fourier,len(fourier)-1)
 	   # Find amplitude
 	   power = np.log10(np.abs(fourier))**2
-	   # Araange array into 6 rows for the 6 LEDs
-	   power = np.reshape(power,(6,chunk/6))
+	   # Araange array into 8 rows for the 8 LEDs
+	   power = np.reshape(power,(8,chunk/8))
 	   matrix= np.int_(np.average(power,axis=1)/4)
 	   return matrix
 
