@@ -261,7 +261,7 @@ class Cloud(object):
 		#matrix= np.int_(np.average(power,axis=1)/4)
 		return matrix
 
-	def Set_Led(row, col, self):
+	def Set_Led(self, row, col):
 		if col > 0x7D:
 			self.PIFACE.output_pins[row].turn_on()
 		else:
