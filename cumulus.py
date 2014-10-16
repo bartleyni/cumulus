@@ -201,7 +201,7 @@ class Cloud(object):
 		# Set up audio
 		sample_rate = 44100
 		no_channels = 2
-		chunk = 512 # Use a multiple of 8
+		chunk = 1024 # Use a multiple of 8
 		data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_NORMAL)
 		data_in.setchannels(no_channels)
 		data_in.setrate(sample_rate)
@@ -216,7 +216,7 @@ class Cloud(object):
 				# catch frame error
 				try:
 					matrix=self.calculate_levels(data, chunk, sample_rate)
-					for i in range (0,6):
+					for i in range (0,8):
 						#Set_Column((1<<matrix[i])-1,0xFF^(1<<i))
 						self.Set_Led((1<<matrix[i])-1,i)								
 
@@ -255,7 +255,7 @@ class Cloud(object):
 		matrix=np.divide(np.multiply(matrix,weighting),1000000)
 		# Set floor at 0 and ceiling at 8 for LED matrix
 		matrix=matrix.clip(0,8) 	   
-
+		print(matrix)
 		# Araange array into 6 rows for the 6 LEDs
 		#power = np.reshape(power,(6,chunk/6))
 		#matrix= np.int_(np.average(power,axis=1)/4)
