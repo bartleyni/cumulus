@@ -235,7 +235,7 @@ class Cloud(object):
 	   
 		matrix    = [0,0,0,0,0,0,0,0]
 		power     = []
-		weighting = [2,8,8,8,16,32,128,128] # Change these according to taste
+		weighting = [2,4,8,8,16,32,64,128] # Change these according to taste
 		
 		# Convert raw data to numpy array
 		data = unpack("%dh"%(len(data)/2),data)
