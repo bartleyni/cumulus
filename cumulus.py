@@ -9,6 +9,9 @@ import random
 import re
 import pifacedigitalio
 import pygame
+import alsaaudio as aa
+import numpy as np
+from struct import unpack
 
 ### Cumulus Semi-Smart Cloud ###
 ### Nick Bartley 2014 ###
@@ -191,7 +194,57 @@ class Cloud(object):
 		if silence == 0:
 			effect = pygame.mixer.Sound("/home/pi/cumulus/thunder/"+str(self.randomSound)+".wav")
 			effect.play()
+	
+	def audio_playback(self):
+		# Set up audio
+		sample_rate = 44100
+		no_channels = 2
+		chunk = 512 # Use a multiple of 8
+		data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_NORMAL)
+		data_in.setchannels(no_channels)
+		data_in.setrate(sample_rate)
+		data_in.setformat(aa.PCM_FORMAT_S16_LE)
+		data_in.setperiodsize(chunk)
 		
+		while self.PIFACE.input_pins[0].value == 1:
+			# Read data from device   
+			l,data = data_in.read()
+			data_in.pause(1) # Pause capture whilst RPi processes data
+			if l:
+				# catch frame error
+				try:
+					matrix=self.calculate_levels(data, chunk,sample_rate)
+					for i in range (0,6):
+						#Set_Column((1<<matrix[i])-1,0xFF^(1<<i))
+						self.Set_Led((1<<matrix[i])-1,i)								
+
+				except audioop.error, e:
+					if e.message !="not a whole number of frames":
+						raise e
+			sleep(0.001)
+			data_in.pause(0) # Resume capture
+			
+	def calculate_levels(data, chunk,sample_rate):
+	   # Convert raw data to numpy array
+	   data = unpack("%dh"%(len(data)/2),data)
+	   data = np.array(data, dtype='h')
+	   # Apply FFT - real data so rfft used
+	   fourier=np.fft.rfft(data)
+	   # Remove last element in array to make it the same size as chunk
+	   fourier=np.delete(fourier,len(fourier)-1)
+	   # Find amplitude
+	   power = np.log10(np.abs(fourier))**2
+	   # Araange array into 6 rows for the 6 LEDs
+	   power = np.reshape(power,(6,chunk/6))
+	   matrix= np.int_(np.average(power,axis=1)/4)
+	   return matrix
+
+	def Set_Led(row, col, self):
+		if col > 0x7D:
+			self.PIFACE.output_pins[row].turn_on()
+		else:
+			self.PIFACE.output_pins[row].turn_off()
+
 if __name__ == "__main__":
 	
 	pfd = pifacedigitalio.PiFaceDigital()
