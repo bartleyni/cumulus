@@ -243,14 +243,14 @@ class Cloud(object):
 		#power = np.log10(np.abs(fourier))**2
 		# Find average 'amplitude' for specific frequency ranges in Hz
 		power = np.abs(fourier)   
-		matrix[0]= int(np.mean(power[piff(0)    :piff(156):1]))
-		matrix[1]= int(np.mean(power[piff(156)  :piff(313):1]))
-		matrix[2]= int(np.mean(power[piff(313)  :piff(625):1]))
-		matrix[3]= int(np.mean(power[piff(625)  :piff(1250):1]))
-		matrix[4]= int(np.mean(power[piff(1250) :piff(2500):1]))
-		matrix[5]= int(np.mean(power[piff(2500) :piff(5000):1]))
-		matrix[6]= int(np.mean(power[piff(5000) :piff(10000):1]))
-		matrix[7]= int(np.mean(power[piff(10000):piff(20000):1]))	   
+		matrix[0]= int(np.mean(power[self.piff(0)    :self.piff(156):1]))
+		matrix[1]= int(np.mean(power[self.piff(156)  :self.piff(313):1]))
+		matrix[2]= int(np.mean(power[self.piff(313)  :self.piff(625):1]))
+		matrix[3]= int(np.mean(power[self.piff(625)  :self.piff(1250):1]))
+		matrix[4]= int(np.mean(power[self.piff(1250) :self.piff(2500):1]))
+		matrix[5]= int(np.mean(power[self.piff(2500) :self.piff(5000):1]))
+		matrix[6]= int(np.mean(power[self.piff(5000) :self.piff(10000):1]))
+		matrix[7]= int(np.mean(power[self.piff(10000):self.piff(20000):1]))	   
 		# Set floor at 0 and ceiling at 8 for LED matrix
 		matrix=matrix.clip(0,8) 	   
 
