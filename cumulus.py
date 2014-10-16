@@ -266,7 +266,7 @@ class Cloud(object):
 			self.PIFACE.output_pins[row].turn_off()
 
 	# Return power array index corresponding to a particular frequency
-	def piff(val):
+	def piff(self, val):
 		return int(2*512*val/44100)
 		
 if __name__ == "__main__":
