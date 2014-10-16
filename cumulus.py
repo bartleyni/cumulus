@@ -201,7 +201,7 @@ class Cloud(object):
 		# Set up audio
 		sample_rate = 44100
 		no_channels = 2
-		chunk = 512 # Use a multiple of 8
+		chunk = 4096 # Use a multiple of 8
 		data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_NORMAL)
 		data_in.setchannels(no_channels)
 		data_in.setrate(sample_rate)
@@ -227,18 +227,36 @@ class Cloud(object):
 			data_in.pause(0) # Resume capture
 			
 	def calculate_levels(self, data, chunk, sample_rate):
-	   # Convert raw data to numpy array
-	   data = unpack("%dh"%(len(data)/2),data)
-	   data = np.array(data, dtype='h')
-	   # Apply FFT - real data so rfft used
-	   fourier=np.fft.rfft(data)
-	   # Remove last element in array to make it the same size as chunk
-	   fourier=np.delete(fourier,len(fourier)-1)
-	   # Find amplitude
-	   power = np.log10(np.abs(fourier))**2
-	   # Araange array into 8 rows for the 8 LEDs
-	   power = np.reshape(power,(8,chunk/8))
-	   matrix= np.int_(np.average(power,axis=1)/4)
+	   
+		matrix    = [0,0,0,0,0,0,0,0]
+		power     = []
+		weighting = [2,2,8,8,16,32,64,64] # Change these according to taste
+		
+		# Convert raw data to numpy array
+		data = unpack("%dh"%(len(data)/2),data)
+		data = np.array(data, dtype='h')
+		# Apply FFT - real data so rfft used
+		fourier=np.fft.rfft(data)
+		# Remove last element in array to make it the same size as chunk
+		fourier=np.delete(fourier,len(fourier)-1)
+		# Find amplitude
+		#power = np.log10(np.abs(fourier))**2
+		# Find average 'amplitude' for specific frequency ranges in Hz
+		power = np.abs(fourier)   
+		matrix[0]= int(np.mean(power[piff(0)    :piff(156):1]))
+		matrix[1]= int(np.mean(power[piff(156)  :piff(313):1]))
+		matrix[2]= int(np.mean(power[piff(313)  :piff(625):1]))
+		matrix[3]= int(np.mean(power[piff(625)  :piff(1250):1]))
+		matrix[4]= int(np.mean(power[piff(1250) :piff(2500):1]))
+		matrix[5]= int(np.mean(power[piff(2500) :piff(5000):1]))
+		matrix[6]= int(np.mean(power[piff(5000) :piff(10000):1]))
+		matrix[7]= int(np.mean(power[piff(10000):piff(20000):1]))	   
+		# Set floor at 0 and ceiling at 8 for LED matrix
+		matrix=matrix.clip(0,8) 	   
+		
+	   # Araange array into 6 rows for the 6 LEDs
+	   #power = np.reshape(power,(6,chunk/6))
+	   #matrix= np.int_(np.average(power,axis=1)/4)
 	   return matrix
 
 	def Set_Led(row, col, self):
@@ -247,6 +265,10 @@ class Cloud(object):
 		else:
 			self.PIFACE.output_pins[row].turn_off()
 
+	# Return power array index corresponding to a particular frequency
+	def piff(val):
+		return int(2*4096*val/44100)
+		
 if __name__ == "__main__":
 	
 	pfd = pifacedigitalio.PiFaceDigital()
