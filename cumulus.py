@@ -267,7 +267,7 @@ class Cloud(object):
 		return matrix
 
 	def Set_Led(self, col, row):
-		if col > 0x7D:
+		if col > 0xC8:
 			self.PIFACE.output_pins[row].turn_on()
 		else:
 			self.PIFACE.output_pins[row].turn_off()
