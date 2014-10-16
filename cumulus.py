@@ -226,7 +226,7 @@ class Cloud(object):
 			sleep(0.001)
 			data_in.pause(0) # Resume capture
 			
-	def calculate_levels(data, chunk, sample_rate):
+	def calculate_levels(self, data, chunk, sample_rate):
 	   # Convert raw data to numpy array
 	   data = unpack("%dh"%(len(data)/2),data)
 	   data = np.array(data, dtype='h')
