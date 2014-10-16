@@ -204,8 +204,8 @@ class Cloud(object):
 	
 	def audio_playback(self):
 		# Set up audio
-		sample_rate = 48000
-		no_channels = 2
+		sample_rate = 44100
+		no_channels = 1
 		chunk = 1024 # Use a multiple of 8
 		data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_NORMAL)
 		data_in.setchannels(no_channels)
@@ -255,12 +255,12 @@ class Cloud(object):
 		matrix[4]= int(np.mean(power[self.piff(1250) :self.piff(2500):1]))
 		matrix[5]= int(np.mean(power[self.piff(2500) :self.piff(5000):1]))
 		matrix[6]= int(np.mean(power[self.piff(5000) :self.piff(10000):1]))
-		matrix[7]= int(np.mean(power[self.piff(10000):self.piff(20000):1]))	   
+		matrix[7]= int(np.mean(power[self.piff(10000):self.piff(20000):1]))
 		# Tidy up column values for the LED matrix
 		matrix=np.divide(np.multiply(matrix,weighting),1000000)
 		# Set floor at 0 and ceiling at 8 for LED matrix
 		matrix=matrix.clip(0,8) 	   
-		print(matrix)
+		#print(matrix)
 		# Araange array into 6 rows for the 6 LEDs
 		#power = np.reshape(power,(6,chunk/6))
 		#matrix= np.int_(np.average(power,axis=1)/4)
@@ -274,7 +274,7 @@ class Cloud(object):
 
 	# Return power array index corresponding to a particular frequency
 	def piff(self, val):
-		return int(2*1024*val/48000)
+		return int(2*1024*val/44100)
 		
 if __name__ == "__main__":
 	
