@@ -41,7 +41,7 @@ class Cloud(object):
 				sensor1 = self.PIFACE.input_pins[4].value
 				sensor2 = self.PIFACE.input_pins[5].value
 				if sensor1 == 0 or sensor2 == 0:
-					subprocess.check_output("sudo pulseaudio -k", shell=True).decode('utf-8')
+					#subprocess.check_output("sudo pulseaudio -k", shell=True).decode('utf-8')
 					self.strikes()
 					self.storm()
 					time.sleep(random.randint(3,10))
