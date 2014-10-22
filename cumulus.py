@@ -34,15 +34,16 @@ class Cloud(object):
 		firstRun = 1
 		while True:
 			pygame.mixer.init()
-			if self.PIFACE.input_pins[0].value == 1 or firstRun == 1:
-				firstRun = 0
+			if self.PIFACE.input_pins[0].value == 1:
+				
 				self.alloff()
 				time.sleep(1)
 				sensor1 = 0
 				sensor2 = 0
 				sensor1 = self.PIFACE.input_pins[4].value
 				sensor2 = self.PIFACE.input_pins[5].value
-				if sensor1 == 0 or sensor2 == 0:
+				if sensor1 == 0 or sensor2 == 0 or firstRun == 1:
+					firstRun = 0
 					#subprocess.check_output("sudo pulseaudio -k", shell=True).decode('utf-8')
 					self.strikes()
 					self.storm()
