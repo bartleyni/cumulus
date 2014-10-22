@@ -33,7 +33,9 @@ class Cloud(object):
 	def run(self):
 		while True:
 			pygame.mixer.init()
-			if self.PIFACE.input_pins[0].value == 1:
+			firstRun = 1
+			if self.PIFACE.input_pins[0].value == 1 or firstRun == 1:
+				firstRun = 0
 				self.alloff()
 				time.sleep(1)
 				sensor1 = 0
