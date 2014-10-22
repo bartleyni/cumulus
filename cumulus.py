@@ -45,12 +45,12 @@ class Cloud(object):
 				if sensor1 == 0 or sensor2 == 0 or firstRun == 1:
 					firstRun = 0
 					#subprocess.check_output("sudo pulseaudio -k", shell=False).decode('utf-8')
-					self.BTVolSet(30000)
+					#self.BTVolSet(30000)
 					self.strikes()
-					self.BTVolSet(10000)
+					#self.BTVolSet(10000)
 					self.storm()
 					time.sleep(random.randint(3,10))
-					self.BTVolSet(65500)
+					#self.BTVolSet(65500)
 			else:
 				#self.soundTOlight()
 				#self.list_devices()
