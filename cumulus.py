@@ -209,8 +209,8 @@ class Cloud(object):
 		sample_rate = 44100
 		no_channels = 1
 		chunk = 512 # Use a multiple of 8
-		data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_ASYNC)
-		#data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_NORMAL)
+		#data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_ASYNC)
+		data_in = aa.PCM(aa.PCM_CAPTURE, aa.PCM_NORMAL)
 		data_in.setchannels(no_channels)
 		data_in.setrate(sample_rate)
 		data_in.setformat(aa.PCM_FORMAT_S16_LE)
