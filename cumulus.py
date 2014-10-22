@@ -31,10 +31,9 @@ class Cloud(object):
 
 	#This is the main cloud loop		
 	def run(self):
-		pygame.mixer.init()
 		while True:
+			#pygame.mixer.init()
 			if self.PIFACE.input_pins[0].value == 1:
-				
 				self.alloff()
 				time.sleep(1)
 				sensor1 = 0
@@ -199,11 +198,11 @@ class Cloud(object):
 	def thunder(self):
 		silence = self.PIFACE.input_pins[3].value
 		self.randomSound = random.randint(1,4)
-		#pygame.mixer.init()
+		pygame.mixer.init()
 		if silence == 0:
 			effect = pygame.mixer.Sound("/home/pi/cumulus/thunder/"+str(self.randomSound)+".wav")
 			effect.play()
-		#pygame.mixer.quit()
+		pygame.mixer.quit()
 
 	def audio_playback(self):
 		# Set up audio
