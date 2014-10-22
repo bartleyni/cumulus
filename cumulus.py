@@ -62,7 +62,7 @@ class Cloud(object):
 			self.PIFACE.output_pins[i].turn_off()
 	
 	def BTVolSet(self, volume):
-		return subprocess.check_output("pacmd set-sink-volume 0 "+str(volume), shell=False).decode('utf-8')
+		return subprocess.call(["pacmd set-sink-volume", "1", "+str(volume)])
 	
 	#This runs a set of strikes	
 	def strikes(self):
