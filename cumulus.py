@@ -44,7 +44,7 @@ class Cloud(object):
 				sensor2 = self.PIFACE.input_pins[5].value
 				if sensor1 == 0 or sensor2 == 0 or firstRun == 1:
 					firstRun = 0
-					#subprocess.check_output("sudo pulseaudio -k", shell=True).decode('utf-8')
+					#subprocess.check_output("sudo pulseaudio -k", shell=False).decode('utf-8')
 					self.BTVolSet(30000)
 					self.strikes()
 					self.BTVolSet(10000)
@@ -62,7 +62,7 @@ class Cloud(object):
 			self.PIFACE.output_pins[i].turn_off()
 	
 	def BTVolSet(self, volume):
-		return subprocess.check_output("pacmd set-sink-volume 0 "+str(volume), shell=True).decode('utf-8')
+		return subprocess.check_output("pacmd set-sink-volume 0 "+str(volume), shell=False).decode('utf-8')
 	
 	#This runs a set of strikes	
 	def strikes(self):
