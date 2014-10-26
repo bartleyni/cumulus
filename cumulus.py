@@ -72,7 +72,7 @@ class Cloud(object):
 			self.delayTime = random.randint(30,5000)/1000
 			self.flash = random.randint(1,3)
 			self.flashTime = random.randint(10,50)/1000
-			self.randomChoose = random.randint(1,8)
+			self.randomChoose = random.randint(0,7)
 			while self.flash > self.sporaticCounter:
 				print("flash")
 				self.PIFACE.output_pins[self.randomChoose].turn_on()
@@ -125,7 +125,7 @@ class Cloud(object):
 		#THIRD FLASH
 		self.PIFACE.output_pins[4].turn_on()
 		time.sleep(random.randrange(5,50,5)/1000)
-		self.PIFACE.output_pins[8].turn_on()
+		self.PIFACE.output_pins[0].turn_on()
 		time.sleep(random.randrange(5,50,5)/1000)
 		self.PIFACE.output_pins[7].turn_on()
 		time.sleep(random.randrange(5,50,5)/1000)
@@ -141,7 +141,7 @@ class Cloud(object):
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[7].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
-		self.PIFACE.output_pins[8].turn_off()
+		self.PIFACE.output_pins[0].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
 		#THUNDER CLAP
 		self.thunder()
@@ -149,7 +149,7 @@ class Cloud(object):
 		#FORTH FLASH
 		self.PIFACE.output_pins[6].turn_on()
 		time.sleep(random.randrange(5,80,5)/1000)
-		self.PIFACE.output_pins[8].turn_on()
+		self.PIFACE.output_pins[0].turn_on()
 		time.sleep(random.randrange(5,80,5)/1000)
 		self.PIFACE.output_pins[3].turn_on()
 		time.sleep(random.randrange(5,80,5)/1000)
@@ -165,7 +165,7 @@ class Cloud(object):
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[7].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
-		self.PIFACE.output_pins[8].turn_off()
+		self.PIFACE.output_pins[0].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[6].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
@@ -198,7 +198,7 @@ class Cloud(object):
 		#SIXTH FLASH
 		self.PIFACE.output_pins[2].turn_on()
 		time.sleep(random.randrange(5,80,5)/1000)
-		self.PIFACE.output_pins[8].turn_on()
+		self.PIFACE.output_pins[0].turn_on()
 		time.sleep(random.randrange(5,80,5)/1000)
 		self.PIFACE.output_pins[4].turn_on()
 		time.sleep(random.randrange(5,80,5)/1000)
@@ -220,7 +220,7 @@ class Cloud(object):
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[7].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
-		self.PIFACE.output_pins[8].turn_off()
+		self.PIFACE.output_pins[0].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
 		self.PIFACE.output_pins[2].turn_off()
 		time.sleep(random.randrange(20,100,10)/1000)
